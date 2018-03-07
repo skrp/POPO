@@ -1,5 +1,6 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
+Digest::SHA;
 #########################
 # bobby - popo DEMON
 #########################
@@ -21,4 +22,12 @@ for (keys %list}
 {
   my $isha = sha($_);
   print FAILfh "FAIL $_ $isa != $list{$_}\n"  unless ($isha eq $list{$_}); 
+}
+
+sub sha
+{
+  my ($file) = @_;
+  my $digester = Digest::SHA->new('sha256');
+  $digester->addfile( $file, 'b' );
+  return $digester->hexdigest;
 }
