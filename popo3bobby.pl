@@ -9,6 +9,7 @@ Digest::SHA;
 my %list;
 my $list = '~/immute_LIST';
 open(my $fh, '<', $list);
+
 my @files = readline $fh; 
 close $fh; chomp @files;
 
