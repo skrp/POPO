@@ -3,20 +3,15 @@ use strict; use warnings;
 # unix or you a bitch-button-smash-hack hacker
 ########################################################
 #                HIVE OVER NFS                         #
-# SPIDR          t_'(o_0)"'      daemon summons scroll #
+# bobby          t_'(o_0)"'      daemon summons scroll #
 #                                                      #
-# grab internet data via queue files                   #
-# admin queue-files over the network                   #
-# distributive-multi-daemon project management over NFS#
+# check immutable file shas                            #
 ########################################################
 use Digest::SHA 'sha256_hex';
 use POSIX;
 use Sys::Hostname 'hostname';
 use File::Path;
 use File::Copy 'move';
-use File::LibMagic;
-use LWP::UserAgent;
-use LWP::Protocol::https;
 ########################################################
 # DATA LOCATIONS ###############################
 # HOST --------------------
@@ -86,11 +81,7 @@ unless (-w $FEED)
 # LIVE &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 while (1)
 {
-	if (-e $SLEEP)
-   	 		{ SLEEP($count, $ttl, @QUE); }
-        
-	my @QUE = que_up();
-        do {print $Lfh "bored\n";  next} if (!@QUE);
+  SLEEP($count, $ttl, @QUE) if (-e $SLEEP);
   my %list;
   my $list = '~/immute_LIST';
   open(my $fh, '<', $list);
@@ -104,9 +95,15 @@ while (1)
     $list{$i[0]}=$i[1];
   }
 
-	tombstone($count, $ttl) if ($count % $RATE == 0);
+  for (keys %list}
+  {
+    my $isha = sha($_);
+    print FAILfh "FAIL $_ $isha != $list{$_}\n"  unless ($isha eq $list{$_}); 
+  }
+  
+  tombstone($count, $ttl) if ($count % $RATE == 0);
   sleep 100000;
-	$count++;
+  $count++;
 }
 # LOGIC ///////////////////////////////////////////////
 sub sha
@@ -201,32 +198,4 @@ sub TIME
   my $time = $mon.'_'.$day.'_'.$hour;
   return $time;
 }
-
-
-
-
-
-#!/usr/local/bin/perl
-use strict; use warnings;
-Digest::SHA;
-#########################
-# bobby - popo DEMON
-#########################
-# %list{$file} = $sha
-#########################
-my %list;
-my $list = '~/immute_LIST';
-open(my $fh, '<', $list);
-#########################
-my @files = readline $fh; 
-close $fh; chomp @files;
-#########################
-
-#########################
-for (keys %list}
-{
-  my $isha = sha($_);
-  print FAILfh "FAIL $_ $isha != $list{$_}\n"  unless ($isha eq $list{$_}); 
-}
-# SUB ###################
 
