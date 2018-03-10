@@ -8,8 +8,8 @@ Sheriff
   grp { popo, lord }
 #######################################
 Barney
-  check_cred            [net-id:OTOPSK]
-  log_off && rm -r $dir [one-time-use-shells]
+  check_in          [net-id:OTOPSK]
+  check_out         [log_off && rm -r $dir // one-time-use-shells]
   grp {popo, barney, bouncer}
 #######################################  
 Phillis
