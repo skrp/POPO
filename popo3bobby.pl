@@ -51,8 +51,8 @@ my $TPATH = '/HIVE/TODO/'; # current DEMONS
 # LOG VARIABLES -----------
 my $RAW = $BIO.$NAME; # output
 my $TODO = $TPATH.$NAME; # leftovers that need to be put back in $FEED
-my $DONE = $FEED.'DONE_'.$NAME; # successful iterations
-my $FAIL = $FEED.'FAIL_'.$NAME; # failed iterations that need to be cleaned up
+my $DONE = $RAW.'DONE_'.$NAME; # successful iterations
+my $FAIL = $RAW.'FAIL_'.$NAME; # failed iterations that need to be cleaned up
 # CONTROL VARIABLES -------
 my $SLEEP = $TPATH.'SLEEP_'.$NAME; # triggers sleep
 # DEMON VARIABLES ---------
@@ -63,8 +63,8 @@ my $YAY = 0; # total sucesses
 my $FA = 0;  # total failures
 $SIG{INT} = \&SUICIDE;
 # OUTPUT ------------------
-open(my $Lfh, '>>', $RAW); $Lfh->autoflush(1);
-open(my $FAILfh, '>>', $FAIL); $FAILfh->autoflush(1);
+open(my $Lfh, '>>', $RAW); $Lfh->autoflush(1); 
+open(my $FAILfh, '>>', $FAIL); $FAILfh->autoflush(1); 
 open(my $DONEfh, '>>', $DONE); $DONEfh->autoflush(1);
 # PREP --------------------
 chdir('/tmp/');
@@ -78,6 +78,14 @@ printf $Lfh ("HELLOWORLD %s\n", TIME());
 while (1)
 {
   SLEEP($count, $ttl, @QUE) if (-e $SLEEP);
+  work();
+  tombstone($count, $ttl) if ($count % $RATE == 0);
+  sleep 100000;
+  $count++;
+}
+# LOGIC ///////////////////////////////////////////////
+sub work
+{
   my %list;
   my $list = '~/immute_LIST';
   open(my $fh, '<', $list);
@@ -96,12 +104,7 @@ while (1)
     my $isha = sha($_);
     print FAILfh "FAIL $_ $isha != $list{$_}\n"  unless ($isha eq $list{$_}); 
   }
-  
-  tombstone($count, $ttl) if ($count % $RATE == 0);
-  sleep 100000;
-  $count++;
 }
-# LOGIC ///////////////////////////////////////////////
 sub sha
 {
   my ($file) = @_;
