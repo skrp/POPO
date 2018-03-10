@@ -13,7 +13,7 @@ Barney
   grp {popo, barney, bouncer}
   
 Phillis
-  chmod_chkr   [chron check register per file on the fs]
+  chmod_chkr         [chron check register per file on the fs]
   sha_immutable_list [chron-check sha static files]
   grp {popo, phillis, rdall}
 
