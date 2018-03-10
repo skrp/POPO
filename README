@@ -9,7 +9,6 @@ Sheriff
 #######################################
 Barney
   check_in          [net-id:OTOPSK]
-  check_out         [log_off && rm -r $dir // one-time-use-shells]
   grp {popo, barney, bouncer}
 #######################################  
 Phillis
@@ -22,4 +21,7 @@ Tommy
   inst_world [set the new world]
   int_keys   [assign keys to accounts]
   grp {popo, tommy, world_creator}
+#######################################
+Betty
+  maid       [rm -r $dir if (log_off == 0)]
 #######################################
