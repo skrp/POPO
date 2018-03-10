@@ -5,6 +5,7 @@ rx4
   reload_conf       [system loads dud conf, reloaded thru krip to set work-state-up]
   dtrace_read_alarm [dtrace memory listner for intruder]
   sha mem-data      [chron check sha of conf-memory]
+  birth             [hatch police DEMON]
   grp { popo, lord }
 #######################################
 92v
@@ -17,9 +18,11 @@ rx4
   grp {popo, phillis, rdall}
 #######################################
 u4r
+  kill_jail  [end -9 jail]
   rm_jail    [scrape away jail]
   inst_world [set the new world]
   int_keys   [assign keys to accounts]
+  gogo       [inform 92v of changes]
   grp {popo, tommy, world_creator}
 #######################################
 8b9
