@@ -32,10 +32,9 @@ use File::Copy 'move';
 # /$DUMPPATH/pool/ :   data dump
 # /$DUMPPATH/g/    :   metadata dump
 ########################################################
-my ($DUMPPATH, $FEED) = @ARGV;
-die "ARG1 dump-site ARG2 FEED" if (!defined $FEED);
+my ($DUMPPATH) = @ARGV;
+die "ARG1 dump-site" if (!defined $DUMP);
 $DUMPPATH =~ s?$?/? if (substr($DUMPPATH, -1, 1) ne "/");
-$FEED =~ s?$?/? if (substr($FEED, -1, 1) ne "/");
 # BIRTH ################################################
 die "STILLBORN" if ((my $birth = daemon()) != 0);
 # PREP @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -51,7 +50,6 @@ my $BIO = $NFSPATH.'BIO/'; # DEMON logs
 my $TPATH = '/HIVE/TODO/'; # current DEMONS
 # LOG VARIABLES -----------
 my $RAW = $BIO.$NAME; # output
-my $QPATH = $FEED.'QUE/';
 my $TODO = $TPATH.$NAME; # leftovers that need to be put back in $FEED
 my $DONE = $FEED.'DONE_'.$NAME; # successful iterations
 my $FAIL = $FEED.'FAIL_'.$NAME; # failed iterations that need to be cleaned up
@@ -76,8 +74,6 @@ unless (mkdir $DUMP)
 h_ping(); # host roster
 printf $Lfh ("HELLOWORLD %s\n", TIME());
 
-unless (-w $FEED)
-	{ print $Lfh "QUE dump nonwriteable\n"; exit; }
 # LIVE &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 while (1)
 {
