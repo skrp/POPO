@@ -1,27 +1,27 @@
 #######################################
 # POPO - kernel perl police DEMON squad
 #######################################
-Sheriff 
+rx4
   reload_conf       [system loads dud conf, reloaded thru krip to set work-state-up]
   dtrace_read_alarm [dtrace memory listner for intruder]
   sha mem-data      [chron check sha of conf-memory]
   grp { popo, lord }
 #######################################
-Barney
+92v
   check_in          [net-id:OTOPSK]
   grp {popo, barney, bouncer}
 #######################################  
-Phillis
+9g6
   chmod_chkr         [chron check register per file on the fs]
   sha_immutable_list [chron-check sha static files]
   grp {popo, phillis, rdall}
 #######################################
-Tommy
+u4r
   rm_jail    [scrape away jail]
   inst_world [set the new world]
   int_keys   [assign keys to accounts]
   grp {popo, tommy, world_creator}
 #######################################
-Betty
+8b9
   maid       [rm -r $dir if (log_off == 0)]
 #######################################
