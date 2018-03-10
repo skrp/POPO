@@ -1,14 +1,28 @@
 #######################################
 # POPO - kernel perl police DEMON squad
 
-Sheriff = reload_conf, dtrace_read_alarm, sha mem-data
+Sheriff 
+  reload_conf       [system loads dud conf, reloaded thru krip to set work-state-up]
+  dtrace_read_alarm [dtrace allocated memory]
+  sha mem-data      [chron check sha of conf-mem]
   grp { popo, lord }
   
-Barney = check_cred, log_off && rm -r $dir
+Barney
+  check_cred            [net-id]
+  log_off && rm -r $dir [one-time-use-shells]
   grp {popo, barney, bouncer}
-Phillis = chmod_chkr, acl_nfsv4_chkr
+  
+Phillis
+  chmod_chkr   [chron check register per file on the fs]
+  acl_nfsv4_chkr
   grp {popo, phillis, rdall}
-Tommy = rm_jail, inst_world, int_keys
+
+Tommy
+  rm_jail    [scrape away jail]
+  inst_world [set the new world]
+  int_keys   [assign keys to accounts]
   grp {popo, tommy, world_creator}
-Bobby = sha_immutable_list
+
+Bobby
+  sha_immutable_list [chron-check sha static files]
   grp {popo, bobby, rdall}
